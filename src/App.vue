@@ -3,16 +3,15 @@
     <h1>
       The One Archive to Rule Them All
     </h1>
-    <label for="character_select">View Character</label>
-    <input type="text" placeholder="Begin typing name" list="characters" id="character_select" v-model="selectedCharacter">
-    <datalist id="characters">
-      <option disabled value="">Begin typing character name...</option>
-      <option v-for="(character, index) in characters" :key="index" :data-value="character" :value="character.Name"></option>
-    </datalist>
+    <character-filter-form :characters="characters"></character-filter-form>
+    <character-detail :character="selectedCharacter"></character-detail>
+    <user-fellowship></user-fellowship>
   </div>
 </template>
 
 <script>
+import CharacterFilterForm from './components/CharacterFilterForm.vue';
+import CharacterDetail from './components/CharacterDetail.vue';
 
 export default {
   name: 'App',
@@ -24,11 +23,12 @@ export default {
     }
   },
   components: {
-
+    "character-filter-form": CharacterFilterForm,
+    "character-detail": CharacterDetail
   },
   methods: {
     fetchCharacter: function () {
-      fetch('https://the-one-api.dev/v2/character?limit=200', {
+      fetch('https://the-one-api.dev/v2/character', {
         method: 'GET',
         headers: {'Authorization': 'Bearer SxLSHXkVB7zFMm22BEK6' }
       })
