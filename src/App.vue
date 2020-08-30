@@ -6,12 +6,29 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
+  data() {
+    return{
+    characters: []
+    }
+  },
   components: {
-    HelloWorld
+
+  },
+  methods: {
+    fetchCharacter: function () {
+      fetch('https://the-one-api.dev/v2/character', {
+        method: 'GET',
+        headers: {'Authorization': 'Bearer SxLSHXkVB7zFMm22BEK6' }
+      })
+      .then(response => response.json())
+      .then(characters => this.characters = characters)
+    }
+  },
+  mounted(){
+    this.fetchCharacter();
   }
 }
 </script>
