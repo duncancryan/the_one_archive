@@ -43,10 +43,17 @@ export default {
     },
     addToFellowship: function () {
       this.fellowship.push(this.selectedCharacter);
+    },
+    removeFellowshipMember: function() {
+      eventBus.$on('member-removed', (member) => {
+        const index = this.fellowship.indexOf(member);
+        this.fellowship.splice(index, 1);
+      })
     }
   },
   mounted(){
     this.fetchCharacter();
+    this.removeFellowshipMember();
 
     eventBus.$on('character-selected', (character) => {
       this.selectedCharacter = character
