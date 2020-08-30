@@ -12,6 +12,7 @@
 <script>
 import CharacterFilterForm from './components/CharacterFilterForm.vue';
 import CharacterDetail from './components/CharacterDetail.vue';
+import {eventBus} from './main.js';
 
 export default {
   name: 'App',
