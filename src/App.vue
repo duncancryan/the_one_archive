@@ -3,6 +3,12 @@
     <h1>
       The One Archive to Rule Them All
     </h1>
+    <label for="character_select">View Character</label>
+    <input type="text" placeholder="Begin typing name" list="characters" id="character_select" v-model="selectedCharacter">
+    <datalist id="characters">
+      <option disabled value="">Begin typing character name...</option>
+      <option v-for="(character, index) in characters" :key="index" :data-value="character" :value="character.Name"></option>
+    </datalist>
   </div>
 </template>
 
@@ -12,7 +18,9 @@ export default {
   name: 'App',
   data() {
     return{
-    characters: []
+    characters: [],
+    selectedCharacter: null,
+    fellowship: []
     }
   },
   components: {
@@ -20,7 +28,7 @@ export default {
   },
   methods: {
     fetchCharacter: function () {
-      fetch('https://the-one-api.dev/v2/character', {
+      fetch('https://the-one-api.dev/v2/character?limit=200', {
         method: 'GET',
         headers: {'Authorization': 'Bearer SxLSHXkVB7zFMm22BEK6' }
       })
@@ -37,5 +45,11 @@ export default {
 <style>
 h1{
   font-family: 'Cinzel Decorative', cursive;
+  color: rgb(168, 196, 66);
+  text-align: center;
+}
+body{
+  background-image: url('https://i.imgur.com/FkKmWVk.jpeg');
+  background-size: cover;
 }
 </style>
