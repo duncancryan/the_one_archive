@@ -35,5 +35,7 @@ export default {
 </script>
 
 <style>
-
+h1{
+  font-family: 'Cinzel Decorative', cursive;
+}
 </style>

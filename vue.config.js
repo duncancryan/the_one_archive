@@ -1,7 +1,7 @@
 const GoogleFontsPlugin = require("google-fonts-webpack-plugin");
 
 module.exports = {
-    chainWebpack: config => {
+    configureWebpack: config => {
         plugins: [
             new GoogleFontsPlugin({
                 fonts: [
