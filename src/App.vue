@@ -4,14 +4,18 @@
       The One Archive to Rule Them All
     </h1>
     <character-filter-form :characters="characters"></character-filter-form>
+    <button v-if="!fellowship.includes(selectedCharacter)" v-on:click="addToFellowship">Add To Fellowship</button>
+    <div id="detail-container">
     <character-detail :character="selectedCharacter"></character-detail>
-    <user-fellowship></user-fellowship>
+    <user-fellowship :fellowship="fellowship"></user-fellowship>
+    </div>
   </div>
 </template>
 
 <script>
 import CharacterFilterForm from './components/CharacterFilterForm.vue';
 import CharacterDetail from './components/CharacterDetail.vue';
+import UserFellowship from './components/UserFellowship.vue'
 import {eventBus} from './main.js';
 
 export default {
@@ -25,7 +29,8 @@ export default {
   },
   components: {
     "character-filter-form": CharacterFilterForm,
-    "character-detail": CharacterDetail
+    "character-detail": CharacterDetail,
+    "user-fellowship": UserFellowship
   },
   methods: {
     fetchCharacter: function () {
@@ -35,6 +40,9 @@ export default {
       })
       .then(response => response.json())
       .then(characters => this.characters = characters.docs)
+    },
+    addToFellowship: function () {
+      this.fellowship.push(this.selectedCharacter);
     }
   },
   mounted(){
@@ -56,5 +64,11 @@ h1{
 body{
   background-image: url('https://i.imgur.com/FkKmWVk.jpeg');
   background-size: cover;
+}
+button{
+  margin-left: 10%;
+}
+#detail-container{
+  display: flex;
 }
 </style>
