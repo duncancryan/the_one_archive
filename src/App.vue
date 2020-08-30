@@ -39,6 +39,10 @@ export default {
   },
   mounted(){
     this.fetchCharacter();
+
+    eventBus.$on('character-selected', (character) => {
+      this.selectedCharacter = character
+    })
   }
 }
 </script>
