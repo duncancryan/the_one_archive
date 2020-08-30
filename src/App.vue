@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>
+      The One Archive to Rule Them All
+    </h1>
   </div>
 </template>
 
@@ -24,7 +25,7 @@ export default {
         headers: {'Authorization': 'Bearer SxLSHXkVB7zFMm22BEK6' }
       })
       .then(response => response.json())
-      .then(characters => this.characters = characters)
+      .then(characters => this.characters = characters.docs)
     }
   },
   mounted(){
@@ -34,12 +35,5 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
