@@ -5,8 +5,9 @@
     </h1>
     <character-filter-form :characters="characters"></character-filter-form>
     <button v-if="!fellowship.includes(selectedCharacter)" v-on:click="addToFellowship">Add To Fellowship</button>
+    <button v-on:click="fetchQuotes">See Quotes</button>
     <div id="detail-container">
-    <character-detail :character="selectedCharacter"></character-detail>
+    <character-detail :character="selectedCharacter" :characterQuotes="characterQuotes"></character-detail>
     <user-fellowship :fellowship="fellowship"></user-fellowship>
     </div>
   </div>
@@ -24,7 +25,8 @@ export default {
     return{
     characters: [],
     selectedCharacter: null,
-    fellowship: []
+    fellowship: [],
+    characterQuotes: []
     }
   },
   components: {
@@ -41,9 +43,20 @@ export default {
       .then(response => response.json())
       .then(characters => this.characters = characters.docs)
     },
+
+    fetchQuotes: function() {
+      fetch(`https://the-one-api.dev/v2/character/${this.selectedCharacter._id}/quote`, {
+        method: 'GET',
+        headers: {'Authorization': 'Bearer SxLSHXkVB7zFMm22BEK6' }
+      })
+      .then(response => response.json())
+      .then(quotes => this.characterQuotes = quotes.docs)
+    },
+
     addToFellowship: function () {
       this.fellowship.push(this.selectedCharacter);
     },
+
     removeFellowshipMember: function() {
       eventBus.$on('member-removed', (member) => {
         const index = this.fellowship.indexOf(member);

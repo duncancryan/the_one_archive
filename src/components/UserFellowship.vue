@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="fellowship-list">
       <ul>
           <h2>My Fellowship</h2>
           <fellowship-member v-for="(member, index) in fellowship" :key="index" :member="member"></fellowship-member>
@@ -23,5 +23,10 @@ export default {
 ul{
     list-style: none;
     color: violet;
+}
+
+#fellowship-list{
+    flex-grow: 1;
+    margin-right: 5%;
 }
 </style>
