@@ -1,7 +1,7 @@
 <template>
   <ul id="quote-flex">
       <li>
-          <p>{{quote.dialog}}</p>
+          <p>"{{quote.dialog}}"</p>
       </li>
   </ul>
 </template>
